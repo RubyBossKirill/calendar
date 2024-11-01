@@ -1,5 +1,5 @@
 // URL вашего Google Apps Script для получения данных из Google Sheets
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5AdKtGSTf8MejP_rNG6IOhxA9Rp--y1767PSkkqeisLEgKyEdUTavKr804wF5qpkHsQ/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9oTWXGn4iLk31HNntvq8gYIoq_DrjiwBCW7gzXIQgFbAiJhr1JbRMBedP3QIh2es3BA/exec';
 
 async function fetchEvents() {
     try {
