@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9oTWXGn4iLk31HNntvq8gYIoq_DrjiwBCW7gzXIQgFbAiJhr1JbRMBedP3QIh2es3BA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0pkuKnd64MEXQMD-EW9W8xeswOcqF0gnWgg7Zps-XYBmS95fxRjS3bQMquJJXdhTjQQ/exec';
 
 async function fetchEvents() {
     try {
