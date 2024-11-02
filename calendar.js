@@ -14,7 +14,7 @@ async function fetchEvents() {
         const response = await fetch(GOOGLE_SCRIPT_URL);
         const data = await response.json();
         events = data.GoogleSheetData.map(event => ({
-            date: event.date || "", 
+            date: event.date || "", // Ожидаем формат "DD.MM.YYYY HH:MM"
             title: event.title,
             description: event.description
         }));
@@ -26,7 +26,7 @@ async function fetchEvents() {
 
 // Функция для отображения событий на выбранную дату
 function showEvents(date) {
-    const dailyEvents = events.filter(event => event.date && event.date.startsWith(date)); 
+    const dailyEvents = events.filter(event => event.date.startsWith(date)); // Сравниваем только дату без времени
     const eventListContainer = document.getElementById("event-list");
 
     if (dailyEvents.length > 0) {
