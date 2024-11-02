@@ -13,7 +13,7 @@ async function fetchEvents() {
         const response = await fetch(GOOGLE_SCRIPT_URL);
         const data = await response.json();
         events = data.GoogleSheetData.map(event => ({
-            date: event.date, // Ожидается формат "DD.MM.YYYY HH:MM"
+            date: event.date || "", // Проверяем, что поле date существует
             title: event.title,
             description: event.description
         }));
@@ -25,7 +25,7 @@ async function fetchEvents() {
 
 // Функция для отображения событий на выбранную дату
 function showEvents(date) {
-    const dailyEvents = events.filter(event => event.date.startsWith(date));
+    const dailyEvents = events.filter(event => event.date && event.date.startsWith(date)); // Проверяем, что date существует
     const eventListContainer = document.getElementById("event-list");
 
     if (dailyEvents.length > 0) {
@@ -55,6 +55,7 @@ function renderCalendar(month, year) {
         const dateStr = `${day.toString().padStart(2, '0')}.${(month + 1).toString().padStart(2, '0')}.${year}`;
         const dayElement = document.createElement("div");
         dayElement.textContent = day;
+        dayElement.classList.add("calendar-day");
 
         // Отмечаем сегодня
         const today = new Date();

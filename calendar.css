@@ -2,44 +2,41 @@
  display: grid;
  grid-template-columns: repeat(7, 1fr);
  gap: 10px;
- max-width: 400px;
- margin: auto;
- background-color: #222;
- padding: 20px;
+ padding: 10px;
+ background-color: #333;
  border-radius: 10px;
 }
 
-#custom-calendar div {
+.calendar-day {
+ width: 40px;
+ height: 40px;
  display: flex;
- justify-content: center;
  align-items: center;
- height: 50px;
- color: #fff;
- font-size: 16px;
+ justify-content: center;
  border-radius: 50%;
- transition: background-color 0.3s;
- cursor: pointer;
-}
-
-#custom-calendar div:hover {
- background-color: #444;
-}
-
-#custom-calendar .today {
- background-color: #f39c12;
  color: #fff;
+ cursor: pointer;
+ transition: background-color 0.3s;
 }
 
-#custom-calendar .selected {
- background-color: #e67e22;
+.calendar-day:hover {
+ background-color: #555;
+}
+
+.today {
+ background-color: #666;
+}
+
+.selected {
+ background-color: #FFA500;
+ color: #fff;
 }
 
 #event-list {
+ margin-top: 20px;
+ padding: 10px;
  background-color: #444;
- padding: 15px;
  border-radius: 10px;
  color: white;
- max-width: 400px;
- margin: 20px auto;
- text-align: center;
+ font-size: 16px;
 }
