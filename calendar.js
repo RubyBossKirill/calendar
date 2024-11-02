@@ -31,13 +31,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         const events = await fetchEvents();
         
         if (events.length > 0) {
-            calendarContainer.textContent = `Загружено ${events.length} событий`;
+            calendarContainer.innerHTML = `<strong>Загружено ${events.length} событий:</strong><br><br>`;
             console.log("Полученные события:", events);
 
-            // Пример обработки данных событий
+            // Структурное отображение событий
             events.forEach(event => {
                 const eventElement = document.createElement("div");
-                eventElement.textContent = `Событие: ${event.title} | Дата: ${event.date} | Описание: ${event.description}`;
+                eventElement.className = "event";
+                eventElement.innerHTML = `
+                    <p><strong>Название:</strong> ${event.title}</p>
+                    <p><strong>Дата:</strong> ${event.date}</p>
+                    <p><strong>Описание:</strong> ${event.description}</p>
+                    <hr>
+                `;
                 calendarContainer.appendChild(eventElement);
             });
         } else {
