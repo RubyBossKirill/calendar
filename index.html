@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивный Календарь</title>
-    <!-- Подключаем CSS с GitHub Pages -->
-    <link rel="stylesheet" href="calendar.css">
+    <title>Календарь</title>
+    <link href="https://rubybosskirill.github.io/calendar/calendar.css" rel="stylesheet">
 </head>
 <body>
-
-<div id="color-calendar-wrapper">
     <div id="color-calendar"></div>
-    <div class="events-display"></div>
-</div>
 
-<!-- Подключаем JavaScript с GitHub Pages -->
-<script src="calendar.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        initCalendar();  // Вызов функции инициализации календаря из подключенного скрипта
-    });
-</script>
+    <script>
+        window.OneWaySchedule = true;
+        window.schedulerv1 = true;
+        window.OneWayExcel = 'https://script.google.com/macros/s/AKfycbz9oTWXGn4iLk31HNntvq8gYIoq_DrjiwBCW7gzXIQgFbAiJhr1JbRMBedP3QIh2es3BA/exec';
+        window.OneWayDeadline = '{deadline}';
+    </script>
 
+    <script src="https://rubybosskirill.github.io/calendar/calendar.js"></script>
 </body>
 </html>
