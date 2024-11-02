@@ -7,13 +7,15 @@
     <link href="https://rubybosskirill.github.io/calendar/calendar.css" rel="stylesheet">
 </head>
 <body>
-    <div id="calendar-navigation">
-        <button id="prev-month">&lt;</button>
-        <span id="month-year"></span>
-        <button id="next-month">&gt;</button>
+    <div id="calendar-container">
+        <div id="calendar-header">
+            <button id="prev-month">&lt;</button>
+            <span id="month-year"></span>
+            <button id="next-month">&gt;</button>
+        </div>
+        <div id="custom-calendar"></div>
+        <div id="event-list">Выберите дату, чтобы увидеть события.</div>
     </div>
-    <div id="custom-calendar"></div>
-    <div id="event-list">Выберите дату, чтобы увидеть события.</div>
 
     <script>
         console.log("index.html и CSS успешно загружены");
