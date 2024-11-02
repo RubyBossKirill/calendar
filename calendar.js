@@ -1,15 +1,15 @@
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGOi1ojnJpWjLSq69bkqCs1JkK1KwaLKnF0lNse2aPAwe3lGqllJMRxoCPMXzu2gIikQ/exec';
-
 console.log("calendar.js загружен и выполняется");
+
+// URL вашего Google Apps Script
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAPgk2MuKzqItmBZfrwpyVeN0z3tikSfsJHowFywUC4GYsRE4jMDUllV-Se-sSIVBMKw/exec';
 
 // Функция для загрузки данных событий из Google Sheets
 async function fetchEvents() {
     console.log("Запуск fetchEvents");
     try {
         const response = await fetch(GOOGLE_SCRIPT_URL);
-        console.log("Ответ получен:", response);
         const data = await response.json();
-        console.log("Данные событий загружены:", data);
+        console.log("Данные событий загружены:", data.GoogleSheetData);
         
         // Возвращаем данные событий
         return data.GoogleSheetData;
@@ -27,13 +27,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         calendarContainer.textContent = "Календарь успешно загружен";
         console.log("Контейнер календаря найден и текст добавлен");
 
-        // Явный вызов fetchEvents и вывод результата
+        // Явный вызов fetchEvents и обработка данных
         const events = await fetchEvents();
-        console.log("Полученные события:", events);
         
-        // Проверка загрузки данных и их отображение
         if (events.length > 0) {
             calendarContainer.textContent = `Загружено ${events.length} событий`;
+            console.log("Полученные события:", events);
+
+            // Пример обработки данных событий
+            events.forEach(event => {
+                const eventElement = document.createElement("div");
+                eventElement.textContent = `Событие: ${event.title} | Дата: ${event.date} | Описание: ${event.description}`;
+                calendarContainer.appendChild(eventElement);
+            });
         } else {
             calendarContainer.textContent = "События не найдены";
         }
@@ -41,4 +47,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Контейнер календаря не найден!");
     }
 });
-
