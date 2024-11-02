@@ -1,5 +1,6 @@
 // URL вашего Google Apps Script для получения данных из Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9oTWXGn4iLk31HNntvq8gYIoq_DrjiwBCW7gzXIQgFbAiJhr1JbRMBedP3QIh2es3BA/exec';
+
 async function fetchEvents() {
     try {
         const response = await fetch(GOOGLE_SCRIPT_URL);
@@ -14,7 +15,7 @@ async function fetchEvents() {
 class Calendar {
     constructor(events) {
         this.events = events;
-        this.selectedDate = null; // добавим переменную для выбранной даты
+        this.selectedDate = null; // Переменная для хранения выбранной даты
         this.renderCalendar();
     }
 
@@ -49,7 +50,7 @@ class Calendar {
 
             // Добавим обработчик клика по дню
             dayEl.addEventListener('click', () => {
-                this.selectDate(day);
+                this.selectDate(dayEl);
                 this.showEvents(dayEvents);
             });
 
@@ -57,18 +58,15 @@ class Calendar {
         }
     }
 
-    selectDate(day) {
+    selectDate(dayEl) {
         // Снимем выделение с предыдущей выбранной даты
         if (this.selectedDate) {
             this.selectedDate.classList.remove('selected-day');
         }
 
         // Установим новое выделение
-        const calendarEl = document.getElementById('color-calendar');
-        this.selectedDate = [...calendarEl.children].find(el => el.innerText == day);
-        if (this.selectedDate) {
-            this.selectedDate.classList.add('selected-day');
-        }
+        this.selectedDate = dayEl;
+        this.selectedDate.classList.add('selected-day');
     }
 
     showEvents(events) {
@@ -90,6 +88,11 @@ class Calendar {
             eventsDisplay.innerHTML = '<p>Нет событий на выбранный день</p>';
         }
     }
+}
+
+async function initCalendar() {
+    const events = await fetchEvents();
+    new Calendar(events);
 }
 
 async function initCalendar() {

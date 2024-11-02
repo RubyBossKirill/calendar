@@ -1,88 +1,87 @@
-body {
- font-family: Arial, sans-serif;
+#color-calendar-wrapper {
  display: flex;
  flex-direction: column;
  align-items: center;
  padding: 20px;
- background-color: #f7f7f7;
- color: #333;
+ background-color: #121212;
+ color: #ffffff;
 }
 
 #color-calendar {
  display: grid;
  grid-template-columns: repeat(7, 1fr);
- gap: 5px;
+ gap: 8px;
  max-width: 400px;
  margin-top: 20px;
- background: #ffffff;
+ background: #1e1e1e;
  padding: 20px;
- border-radius: 10px;
- box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ border-radius: 15px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-h2 {
+#color-calendar h2 {
  font-size: 24px;
  text-align: center;
  grid-column: span 7;
  margin: 0 0 10px;
  font-weight: bold;
- color: #4a90e2;
+ color: #f1c40f;
 }
 
-.calendar-day {
+#color-calendar .calendar-day {
  padding: 15px;
- border: 1px solid #e0e0e0;
+ border: 1px solid #333;
  text-align: center;
- background-color: #fafafa;
- border-radius: 5px;
+ background-color: #2e2e2e;
+ border-radius: 50%;
  font-size: 14px;
+ color: #ffffff;
  transition: background-color 0.3s, transform 0.2s;
  cursor: pointer;
 }
 
-.calendar-day:hover {
- background-color: #e6f7ff;
- transform: scale(1.05);
+#color-calendar .calendar-day:hover {
+ background-color: #f1c40f;
+ color: #1e1e1e;
+ transform: scale(1.1);
 }
 
-.calendar-day.has-event {
- background-color: #d4eaff;
- border-color: #4a90e2;
- color: #333;
+#color-calendar .calendar-day.has-event {
+ border-color: #f1c40f;
 }
 
-.calendar-day-today {
- border: 2px solid #ff8c42;
- font-weight: bold;
+#color-calendar .selected-day {
+ background-color: #f1c40f;
+ color: #1e1e1e;
 }
 
 .events-display {
  margin-top: 20px;
  max-width: 400px;
  text-align: left;
- background-color: #ffffff;
+ background-color: #1e1e1e;
  padding: 15px;
- border-radius: 8px;
- box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.event {
+.events-display .event {
  margin-bottom: 15px;
  padding: 10px;
- border: 1px solid #e0e0e0;
- background-color: #f9f9f9;
+ border: 1px solid #333;
+ background-color: #2e2e2e;
  border-radius: 5px;
 }
 
-.event strong {
- color: #4a90e2;
+.events-display .event strong {
+ color: #f1c40f;
 }
 
-.event a {
+.events-display .event a {
  color: #ff8c42;
  text-decoration: none;
 }
 
-.event a:hover {
+.events-display .event a:hover {
  text-decoration: underline;
 }

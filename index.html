@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивный Календарь</title>
+    <!-- Подключаем CSS с GitHub Pages -->
     <link rel="stylesheet" href="calendar.css">
 </head>
 <body>
 
-<div id="color-calendar"></div>
-<div class="events-display"></div>
+<div id="color-calendar-wrapper">
+    <div id="color-calendar"></div>
+    <div class="events-display"></div>
+</div>
 
+<!-- Подключаем JavaScript с GitHub Pages -->
 <script src="calendar.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initCalendar();  // Вызов функции инициализации календаря
+        initCalendar();  // Вызов функции инициализации календаря из подключенного скрипта
     });
 </script>
 
