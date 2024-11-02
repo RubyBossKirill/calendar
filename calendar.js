@@ -13,13 +13,18 @@ async function fetchEvents() {
 
 // Проверка, находится ли дата (в формате DD.MM.YYYY HH:MM) в заданном диапазоне
 function isDateInRange(currentDate, startDateStr, endDateStr) {
-    const [startDay, startMonth, startYear] = startDateStr.split(' ')[0].split('.').map(Number);
-    const [endDay, endMonth, endYear] = endDateStr.split(' ')[0].split('.').map(Number);
-    const startDate = new Date(startYear, startMonth - 1, startDay);
-    const endDate = new Date(endYear, endMonth - 1, endDay);
+ // Разбиваем строки на части и создаем объекты Date для диапазона
+ const [startDay, startMonth, startYear] = startDateStr.split(' ')[0].split('.').map(Number);
+ const [endDay, endMonth, endYear] = endDateStr.split(' ')[0].split('.').map(Number);
+ const startDate = new Date(startYear, startMonth - 1, startDay);
+ const endDate = new Date(endYear, endMonth - 1, endDay);
 
-    return currentDate >= startDate && currentDate <= endDate;
+ // Логируем, чтобы проверить корректность дат
+ console.log("Проверка даты:", { currentDate, startDate, endDate, startDateStr, endDateStr });
+
+ return currentDate >= startDate && currentDate <= endDate;
 }
+
 
 class Calendar {
     constructor(events) {
