@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             calendarContainer.innerHTML = `<strong>Загружено ${events.length} событий:</strong><br><br>`;
             console.log("Полученные события:", events);
 
-            // Структурное отображение событий
+            // Структурное отображение событий с правильным порядком данных
             events.forEach(event => {
                 const eventElement = document.createElement("div");
                 eventElement.className = "event";
                 eventElement.innerHTML = `
-                    <p><strong>Название:</strong> ${event.title}</p>
                     <p><strong>Дата:</strong> ${event.date}</p>
+                    <p><strong>Название:</strong> ${event.title}</p>
                     <p><strong>Описание:</strong> ${event.description}</p>
                     <hr>
                 `;
