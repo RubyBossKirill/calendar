@@ -12,6 +12,16 @@ async function fetchEvents() {
     }
 }
 
+// Проверка, находится ли дата (в формате DD:MM:YYYY) в заданном диапазоне
+function isDateInRange(currentDate, startDateStr, endDateStr) {
+    const [startDay, startMonth, startYear] = startDateStr.split(' ')[0].split(':').map(Number);
+    const [endDay, endMonth, endYear] = endDateStr.split(' ')[0].split(':').map(Number);
+    const startDate = new Date(startYear, startMonth - 1, startDay);
+    const endDate = new Date(endYear, endMonth - 1, endDay);
+
+    return currentDate >= startDate && currentDate <= endDate;
+}
+
 class Calendar {
     constructor(events) {
         this.events = events;
@@ -38,10 +48,12 @@ class Calendar {
             dayEl.className = 'calendar-day';
             dayEl.innerText = day;
 
+            // Создаем дату для текущего дня
+            const currentDate = new Date(year, month, day);
+
             // Проверка на события
             const dayEvents = this.events.filter(event => {
-                const eventDate = new Date(event.start).getDate();
-                return eventDate === day;
+                return isDateInRange(currentDate, event.start, event.end);
             });
 
             if (dayEvents.length > 0) {
@@ -79,6 +91,8 @@ class Calendar {
                 eventEl.className = 'event';
                 eventEl.innerHTML = `
                     <strong>${event.name}</strong><br>
+                    <em>Начало: ${event.start}</em><br>
+                    <em>Окончание: ${event.end}</em><br>
                     ${event.desc}<br>
                     <a href="${event.url}" target="_blank">Подробнее</a>
                 `;
@@ -88,11 +102,6 @@ class Calendar {
             eventsDisplay.innerHTML = '<p>Нет событий на выбранный день</p>';
         }
     }
-}
-
-async function initCalendar() {
-    const events = await fetchEvents();
-    new Calendar(events);
 }
 
 async function initCalendar() {

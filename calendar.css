@@ -1,10 +1,19 @@
+/* Убираем черный фон с тела страницы */
+body {
+ font-family: Arial, sans-serif;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 20px;
+ background-color: #ffffff; /* Устанавливаем белый фон */
+ color: #333; /* Темный текст */
+}
+
 #color-calendar-wrapper {
  display: flex;
  flex-direction: column;
  align-items: center;
  padding: 20px;
- background-color: #121212;
- color: #ffffff;
 }
 
 #color-calendar {
@@ -13,7 +22,7 @@
  gap: 8px;
  max-width: 400px;
  margin-top: 20px;
- background: #1e1e1e;
+ background: #1e1e1e; /* Фон календаря */
  padding: 20px;
  border-radius: 15px;
  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -25,14 +34,14 @@
  grid-column: span 7;
  margin: 0 0 10px;
  font-weight: bold;
- color: #f1c40f;
+ color: #f1c40f; /* Цвет заголовка */
 }
 
-#color-calendar .calendar-day {
+.calendar-day {
  padding: 15px;
  border: 1px solid #333;
  text-align: center;
- background-color: #2e2e2e;
+ background-color: #2e2e2e; /* Цвет дней */
  border-radius: 50%;
  font-size: 14px;
  color: #ffffff;
@@ -40,18 +49,14 @@
  cursor: pointer;
 }
 
-#color-calendar .calendar-day:hover {
- background-color: #f1c40f;
+.calendar-day:hover {
+ background-color: #f1c40f; /* Цвет при наведении */
  color: #1e1e1e;
  transform: scale(1.1);
 }
 
-#color-calendar .calendar-day.has-event {
- border-color: #f1c40f;
-}
-
-#color-calendar .selected-day {
- background-color: #f1c40f;
+.selected-day {
+ background-color: #f1c40f; /* Цвет для выбранного дня */
  color: #1e1e1e;
 }
 
@@ -59,13 +64,13 @@
  margin-top: 20px;
  max-width: 400px;
  text-align: left;
- background-color: #1e1e1e;
+ background-color: #1e1e1e; /* Фон блока событий */
  padding: 15px;
  border-radius: 10px;
  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.events-display .event {
+.event {
  margin-bottom: 15px;
  padding: 10px;
  border: 1px solid #333;
@@ -73,15 +78,15 @@
  border-radius: 5px;
 }
 
-.events-display .event strong {
- color: #f1c40f;
+.event strong {
+ color: #f1c40f; /* Цвет для названий событий */
 }
 
-.events-display .event a {
+.event a {
  color: #ff8c42;
  text-decoration: none;
 }
 
-.events-display .event a:hover {
+.event a:hover {
  text-decoration: underline;
 }
