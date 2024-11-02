@@ -133,14 +133,11 @@ async function fetchEvents() {
     try {
         const response = await fetch(GOOGLE_SCRIPT_URL);
         const data = await response.json();
-        events = data.GoogleSheetData.map(event => {
-            console.log("Событие из Google Sheets:", event); // Логирование каждого события
-            return {
-                date: event.startDate || "", // Используем startDate вместо date
-                title: event.title,
-                description: event.description
-            };
-        });
+        events = data.GoogleSheetData.map(event => ({
+            date: event.startDate || "", // Используем startDate для даты
+            title: event.title,
+            description: event.description
+        }));
         console.log("Данные событий загружены:", events);
     } catch (error) {
         console.error("Ошибка при загрузке событий:", error);
