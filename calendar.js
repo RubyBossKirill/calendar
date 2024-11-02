@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyohtjyqJ5ozulyyIfZeFEfr7ejN3D4nUyzYnI57HqvNMwZ_9iNS2-LB78Ktzb6XLoY/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhRqFcrPzV3OIge3-Njh0QOll3mfKSWeiXcjcLreqEZb5emvSG1fkQC4i3-nDIfwZkFg/exec';
 
 console.log("calendar.js загружен и выполняется");
 
