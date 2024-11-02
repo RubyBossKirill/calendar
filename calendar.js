@@ -1,9 +1,7 @@
 console.log("calendar.js загружен и выполняется");
 
-// URL вашего Google Apps Script
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
 
-// Функция для загрузки данных событий из Google Sheets
 async function fetchEvents() {
     console.log("Запуск fetchEvents");
     try {
@@ -21,34 +19,37 @@ async function fetchEvents() {
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("DOM загружен и обработчик событий запущен");
 
-    const calendarContainer = document.getElementById('color-calendar');
-    if (calendarContainer) {
-        calendarContainer.textContent = "Календарь успешно загружен";
-        console.log("Контейнер календаря найден и текст добавлен");
+    const events = await fetchEvents();
+    const calendarEvents = events.map(event => ({
+        start: event.startDate,
+        end: event.endDate,
+        name: event.title,
+        description: event.description,
+        url: event.url
+    }));
 
-        const events = await fetchEvents();
-        
-        if (events.length > 0) {
-            calendarContainer.innerHTML = `<strong>Загружено ${events.length} событий:</strong><br><br>`;
-            console.log("Полученные события:", events);
-
+    // Инициализация календаря
+    new Calendar({
+        id: '#color-calendar',
+        calendarSize: 'large',
+        eventsData: calendarEvents,
+        theme: 'basic',
+        dateChanged: (currentDate, events) => {
+            console.log("Текущая дата:", currentDate);
+            console.log("События в эту дату:", events);
+            const eventList = document.getElementById('event-list');
+            eventList.innerHTML = "";  // Очистка списка событий
             events.forEach(event => {
                 const eventElement = document.createElement("div");
                 eventElement.className = "event";
                 eventElement.innerHTML = `
-                    <p><strong>Дата начала:</strong> ${event.startDate}</p>
-                    <p><strong>Дата окончания:</strong> ${event.endDate}</p>
-                    <p><strong>Название:</strong> ${event.title}</p>
+                    <p><strong>Название:</strong> ${event.name}</p>
                     <p><strong>Описание:</strong> ${event.description}</p>
                     <p><strong>URL:</strong> <a href="${event.url}" target="_blank">${event.url}</a></p>
                     <hr>
                 `;
-                calendarContainer.appendChild(eventElement);
+                eventList.appendChild(eventElement);
             });
-        } else {
-            calendarContainer.textContent = "События не найдены";
         }
-    } else {
-        console.error("Контейнер календаря не найден!");
-    }
+    });
 });

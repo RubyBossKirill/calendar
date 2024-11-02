@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Календарь событий</title>
+    <!-- Стили для основного отображения и библиотеки календаря -->
     <link href="https://rubybosskirill.github.io/calendar/calendar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/color-calendar/dist/css/theme-basic.css">
 </head>
-<body>
-    <div id="color-calendar" style="color: white; font-size: 24px;">Тестовая страница с JavaScript</div>
+<body style="background-color: #333; color: white; font-size: 18px; padding: 20px;">
 
-    <script>
-        console.log("index.html и CSS успешно загружены");
-        console.log("Глобальные переменные для календаря установлены");
-    </script>
+    <!-- Контейнер для календаря -->
+    <div id="color-calendar"></div>
 
+    <!-- Контейнер для отображения списка событий при выборе даты -->
+    <div id="event-list" style="margin-top: 20px;">
+        <strong>Выберите дату, чтобы увидеть события.</strong>
+    </div>
+
+    <!-- Подключение библиотек и основного кода -->
     <script src="https://rubybosskirill.github.io/calendar/calendar.js"></script>
-    <script>
-        console.log("calendar.js подключен");
-    </script>
+    <script src="https://unpkg.com/color-calendar/dist/calendar.min.js"></script>
+
 </body>
 </html>
