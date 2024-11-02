@@ -120,7 +120,7 @@
 
 console.log("calendar.js загружен и выполняется");
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhiPnFrLskqXzUTnK9_gLUi2r3lZdoPa7a73Mg7960wp1ZzLrNOOjphETfEJktxH47_A/exec';
 
 // Хранение загруженных событий
 let events = [];
