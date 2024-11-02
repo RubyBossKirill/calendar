@@ -16,40 +16,38 @@ async function fetchEvents() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    console.log("DOM загружен и обработчик событий запущен");
+document.addEventListener("DOMContentLoaded", () => {
+ console.log("DOM загружен и обработчик событий запущен");
 
-    const events = await fetchEvents();
-    const calendarEvents = events.map(event => ({
-        start: event.startDate,
-        end: event.endDate,
-        name: event.title,
-        description: event.description,
-        url: event.url
-    }));
+ // Инициализация календаря
+ const calendar = new Calendar({
+     id: "#color-calendar",
+     theme: "basic",
+     primaryColor: "#f39c12",
+     headerColor: "#f39c12",
+     textColor: "#fff",
+     weekdaysColor: "#fff",
+     dateChanged: (currentDate) => {
+         const dateStr = `${currentDate.getDate().toString().padStart(2, '0')}.${(currentDate.getMonth() + 1).toString().padStart(2, '0')}.${currentDate.getFullYear()}`;
+         showEvents(dateStr);
+     }
+ });
 
-    // Инициализация календаря
-    new Calendar({
-        id: '#color-calendar',
-        calendarSize: 'large',
-        eventsData: calendarEvents,
-        theme: 'basic',
-        dateChanged: (currentDate, events) => {
-            console.log("Текущая дата:", currentDate);
-            console.log("События в эту дату:", events);
-            const eventList = document.getElementById('event-list');
-            eventList.innerHTML = "";  // Очистка списка событий
-            events.forEach(event => {
-                const eventElement = document.createElement("div");
-                eventElement.className = "event";
-                eventElement.innerHTML = `
-                    <p><strong>Название:</strong> ${event.name}</p>
-                    <p><strong>Описание:</strong> ${event.description}</p>
-                    <p><strong>URL:</strong> <a href="${event.url}" target="_blank">${event.url}</a></p>
-                    <hr>
-                `;
-                eventList.appendChild(eventElement);
-            });
-        }
-    });
+ // Массив событий (замените на вашу логику получения событий)
+ const events = [
+     { date: "01.11.2024", title: "Событие 1", description: "Описание события 1" },
+     { date: "02.11.2024", title: "Событие 2", description: "Описание события 2" },
+ ];
+
+ // Функция для отображения событий
+ function showEvents(date) {
+     const dailyEvents = events.filter(event => event.date === date);
+     const eventListContainer = document.getElementById("event-list");
+     eventListContainer.innerHTML = dailyEvents.length > 0
+         ? dailyEvents.map(event => `<div><strong>${event.title}</strong><p>${event.description}</p></div>`).join("")
+         : "<strong>Нет событий на выбранный день.</strong>";
+ }
+
+ console.log("Календарь инициализирован");
 });
+
