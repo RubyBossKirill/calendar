@@ -1,21 +1,13 @@
-/* Убираем черный фон с тела страницы */
-body {
- font-family: Arial, sans-serif;
+/* Основной фон для блока календаря */
+.calendar-background {
  display: flex;
  flex-direction: column;
  align-items: center;
  padding: 20px;
- background-color: #ffffff; /* Устанавливаем белый фон */
- color: #333; /* Темный текст */
+ background-color: #ffffff; /* Белый фон */
 }
 
-#color-calendar-wrapper {
- display: flex;
- flex-direction: column;
- align-items: center;
- padding: 20px;
-}
-
+/* Основные стили календаря */
 #color-calendar {
  display: grid;
  grid-template-columns: repeat(7, 1fr);
@@ -68,6 +60,7 @@ body {
  padding: 15px;
  border-radius: 10px;
  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+ color: #ffffff; /* Белый текст в блоке событий */
 }
 
 .event {
@@ -78,8 +71,8 @@ body {
  border-radius: 5px;
 }
 
-.event strong {
- color: #f1c40f; /* Цвет для названий событий */
+.event strong, .event em, .event p {
+ color: #ffffff; /* Белый текст для названий и описаний событий */
 }
 
 .event a {

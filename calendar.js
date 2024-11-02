@@ -1,4 +1,3 @@
-// URL вашего Google Apps Script для получения данных из Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9oTWXGn4iLk31HNntvq8gYIoq_DrjiwBCW7gzXIQgFbAiJhr1JbRMBedP3QIh2es3BA/exec';
 
 async function fetchEvents() {
@@ -12,10 +11,10 @@ async function fetchEvents() {
     }
 }
 
-// Проверка, находится ли дата (в формате DD:MM:YYYY) в заданном диапазоне
+// Проверка, находится ли дата (в формате DD.MM.YYYY HH:MM) в заданном диапазоне
 function isDateInRange(currentDate, startDateStr, endDateStr) {
-    const [startDay, startMonth, startYear] = startDateStr.split(' ')[0].split(':').map(Number);
-    const [endDay, endMonth, endYear] = endDateStr.split(' ')[0].split(':').map(Number);
+    const [startDay, startMonth, startYear] = startDateStr.split(' ')[0].split('.').map(Number);
+    const [endDay, endMonth, endYear] = endDateStr.split(' ')[0].split('.').map(Number);
     const startDate = new Date(startYear, startMonth - 1, startDay);
     const endDate = new Date(endYear, endMonth - 1, endDay);
 
@@ -25,7 +24,7 @@ function isDateInRange(currentDate, startDateStr, endDateStr) {
 class Calendar {
     constructor(events) {
         this.events = events;
-        this.selectedDate = null; // Переменная для хранения выбранной даты
+        this.selectedDate = null;
         this.renderCalendar();
     }
 
