@@ -1,10 +1,11 @@
 console.log("calendar.js загружен и выполняется");
 
-// URL для API Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
 
 // Хранение загруженных событий
 let events = [];
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
 
 // Функция для загрузки событий из Google Sheets
 async function fetchEvents() {
@@ -13,7 +14,7 @@ async function fetchEvents() {
         const response = await fetch(GOOGLE_SCRIPT_URL);
         const data = await response.json();
         events = data.GoogleSheetData.map(event => ({
-            date: event.date || "", // Проверяем, что поле date существует
+            date: event.date || "", 
             title: event.title,
             description: event.description
         }));
@@ -25,7 +26,7 @@ async function fetchEvents() {
 
 // Функция для отображения событий на выбранную дату
 function showEvents(date) {
-    const dailyEvents = events.filter(event => event.date && event.date.startsWith(date)); // Проверяем, что date существует
+    const dailyEvents = events.filter(event => event.date && event.date.startsWith(date)); 
     const eventListContainer = document.getElementById("event-list");
 
     if (dailyEvents.length > 0) {
@@ -40,10 +41,16 @@ function showEvents(date) {
 // Функция для отображения календаря
 function renderCalendar(month, year) {
     const calendarContainer = document.getElementById("custom-calendar");
-    calendarContainer.innerHTML = ""; // Очищаем предыдущий календарь
+    calendarContainer.innerHTML = ""; 
 
     const firstDay = new Date(year, month).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Отображаем месяц и год
+    document.getElementById("month-year").textContent = new Date(year, month).toLocaleString("ru-RU", {
+        month: "long",
+        year: "numeric"
+    });
 
     // Заполняем пустые клетки до начала месяца
     for (let i = 0; i < firstDay; i++) {
@@ -57,31 +64,51 @@ function renderCalendar(month, year) {
         dayElement.textContent = day;
         dayElement.classList.add("calendar-day");
 
-        // Отмечаем сегодня
         const today = new Date();
         if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
             dayElement.classList.add("today");
         }
 
-        // Добавляем событие на клик
         dayElement.addEventListener("click", () => {
             document.querySelectorAll("#custom-calendar .selected").forEach(el => el.classList.remove("selected"));
             dayElement.classList.add("selected");
-            showEvents(dateStr); // Передаем только дату без времени
+            showEvents(dateStr); 
         });
 
         calendarContainer.appendChild(dayElement);
     }
 }
 
+// Функции для переключения месяца
+function prevMonth() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+}
+
+function nextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+}
+
 // Основной код, выполняющийся после загрузки DOM
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM загружен и обработчик событий запущен");
     
+    // Назначаем обработчики событий для кнопок переключения
+    document.getElementById("prev-month").addEventListener("click", prevMonth);
+    document.getElementById("next-month").addEventListener("click", nextMonth);
+
     // Загрузка событий и инициализация календаря
     fetchEvents().then(() => {
-        const today = new Date();
-        renderCalendar(today.getMonth(), today.getFullYear());
+        renderCalendar(currentMonth, currentYear);
     });
 
     console.log("Календарь инициализирован и ожидает данные");

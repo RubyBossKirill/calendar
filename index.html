@@ -6,17 +6,29 @@
     <title>Календарь событий</title>
     <link href="https://rubybosskirill.github.io/calendar/calendar.css" rel="stylesheet">
 </head>
-<body style="background-color: #333; color: white; font-size: 18px; padding: 20px;">
-
-    <!-- Контейнер для календаря -->
-    <div id="custom-calendar"></div>
-
-    <!-- Контейнер для отображения списка событий при выборе даты -->
-    <div id="event-list" style="margin-top: 20px;">
-        <strong>Выберите дату, чтобы увидеть события.</strong>
+<body>
+    <div id="calendar-navigation">
+        <button id="prev-month">&lt;</button>
+        <span id="month-year"></span>
+        <button id="next-month">&gt;</button>
     </div>
+    <div id="custom-calendar"></div>
+    <div id="event-list">Выберите дату, чтобы увидеть события.</div>
 
-    <!-- Подключение JavaScript -->
+    <script>
+        console.log("index.html и CSS успешно загружены");
+
+        window.OneWaySchedule = true;
+        window.schedulerv1 = true;
+        window.OneWayExcel = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
+        window.OneWayDeadline = '{deadline}';
+
+        console.log("Глобальные переменные для календаря установлены");
+    </script>
+
     <script src="https://rubybosskirill.github.io/calendar/calendar.js"></script>
+    <script>
+        console.log("calendar.js подключен");
+    </script>
 </body>
 </html>
