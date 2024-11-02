@@ -18,7 +18,7 @@ async function fetchEvents() {
             title: event.title,
             description: event.description
         }));
-        console.log("Данные событий загружены:", events);
+        console.log("Данные событий загружены (получено из Google Sheets):", events);
     } catch (error) {
         console.error("Ошибка при загрузке событий:", error);
     }
@@ -26,7 +26,10 @@ async function fetchEvents() {
 
 // Функция для отображения событий на выбранную дату
 function showEvents(date) {
+    console.log(`Фильтрация событий на выбранную дату: ${date}`);
     const dailyEvents = events.filter(event => event.date.startsWith(date)); // Сравниваем только дату без времени
+    console.log("Отфильтрованные события:", dailyEvents);
+
     const eventListContainer = document.getElementById("event-list");
 
     if (dailyEvents.length > 0) {
