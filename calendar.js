@@ -1,3 +1,46 @@
+// console.log("calendar.js загружен и выполняется");
+
+// const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
+
+// // Хранение загруженных событий
+// let events = [];
+// let currentMonth = new Date().getMonth();
+// let currentYear = new Date().getFullYear();
+
+// // Функция для загрузки событий из Google Sheets
+// async function fetchEvents() {
+//     console.log("Запуск fetchEvents");
+//     try {
+//         const response = await fetch(GOOGLE_SCRIPT_URL);
+//         const data = await response.json();
+//         events = data.GoogleSheetData.map(event => ({
+//             date: event.date || "", // Ожидаем формат "DD.MM.YYYY HH:MM"
+//             title: event.title,
+//             description: event.description
+//         }));
+//         console.log("Данные событий загружены (получено из Google Sheets):", events);
+//     } catch (error) {
+//         console.error("Ошибка при загрузке событий:", error);
+//     }
+// }
+
+// // Функция для отображения событий на выбранную дату
+// function showEvents(date) {
+//     console.log(`Фильтрация событий на выбранную дату: ${date}`);
+//     const dailyEvents = events.filter(event => event.date.startsWith(date)); // Сравниваем только дату без времени
+//     console.log("Отфильтрованные события:", dailyEvents);
+
+//     const eventListContainer = document.getElementById("event-list");
+
+//     if (dailyEvents.length > 0) {
+//         eventListContainer.innerHTML = dailyEvents
+//             .map((event, index) => `<div><strong>${index + 1}. ${event.title}</strong><p>- ${event.description}</p></div>`)
+//             .join("");
+//     } else {
+//         eventListContainer.innerHTML = "<strong>Нет событий на выбранный день.</strong>";
+//     }
+// }
+
 console.log("calendar.js загружен и выполняется");
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywJ7rlB3zPYSbDGeNlb80XcPJMEYFNCQ8sSeuzbz-PtZ_ct_yg4vNRBROXOv89QQa8rA/exec';
@@ -13,12 +56,15 @@ async function fetchEvents() {
     try {
         const response = await fetch(GOOGLE_SCRIPT_URL);
         const data = await response.json();
-        events = data.GoogleSheetData.map(event => ({
-            date: event.date || "", // Ожидаем формат "DD.MM.YYYY HH:MM"
-            title: event.title,
-            description: event.description
-        }));
-        console.log("Данные событий загружены (получено из Google Sheets):", events);
+        events = data.GoogleSheetData.map(event => {
+            console.log("Событие из Google Sheets:", event); // Логирование каждого события
+            return {
+                date: event.date || "", // Ожидаем формат "DD.MM.YYYY HH:MM"
+                title: event.title,
+                description: event.description
+            };
+        });
+        console.log("Данные событий загружены:", events);
     } catch (error) {
         console.error("Ошибка при загрузке событий:", error);
     }
@@ -27,7 +73,10 @@ async function fetchEvents() {
 // Функция для отображения событий на выбранную дату
 function showEvents(date) {
     console.log(`Фильтрация событий на выбранную дату: ${date}`);
-    const dailyEvents = events.filter(event => event.date.startsWith(date)); // Сравниваем только дату без времени
+    const dailyEvents = events.filter(event => {
+        console.log("Проверка события с датой:", event.date); // Логирование даты каждого события для проверки
+        return event.date.startsWith(date); 
+    });
     console.log("Отфильтрованные события:", dailyEvents);
 
     const eventListContainer = document.getElementById("event-list");
@@ -40,6 +89,11 @@ function showEvents(date) {
         eventListContainer.innerHTML = "<strong>Нет событий на выбранный день.</strong>";
     }
 }
+
+// Остальной код остается без изменений
+// Функции для отображения календаря, переключения месяца и основная инициализация
+// ...
+
 
 // Функция для отображения календаря
 function renderCalendar(month, year) {
